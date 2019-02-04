@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+    <script>
+        let statement1 = `Arealet er for lille`
+        let statement2 = `Arealet er for ok`
+        let statement3 = `Arealet er for stort`
+        let længde = 3;
+        let bredde = 5;
+        let arial = længde * bredde;
+        let resultat = `Længden er ${længde} meter og bredden er ${bredde} meter. Arealet er ${arial} kvadratmeter` //Template litterals
+        console.log(resultat);
+        if (arial < 100) {
+            console.log(statement1)
+        } else if (arial > 99 && arial < 201) {
+            console.log(statement2)
+        } else if (arial >= 200) {
+            console.log(statement3)
+        }
+
+    </script>
+</body>
+
+</html>
