@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+    <script>
+        let txt1 = "Undervægtig"
+        let txt2 = "Normal"
+        let txt3 = "Overvægtig"
+        let txt4 = "Fed"
+        let txt5 = "Svær fedme"
+        let txt6 = "Ekstremt fed"
+        let højde = prompt("Angiv din højde i cm");
+        let vægt = prompt("Angiv din vægt");
+        let bmi = vægt / ((højde / 100) * (højde / 100));
+        console.log(bmi);
+        if (bmi < 20) {
+            confirm(`Din bmi er ${bmi} vil du se din vægtklasse?`);
+            confirm(`din vægtklasse er ${txt1}`);
+            location.reload();
+        } else if (bmi > 19 && bmi < 26) {
+            confirm(`Din bmi er ${bmi} vil du se din vægtklasse?`);
+            confirm(`din vægtklasse er ${txt2}`);
+            location.reload();
+        } else if (bmi > 25 && bmi < 31) {
+            confirm(`Din bmi er ${bmi} vil du se din vægtklasse?`);
+            confirm(`din vægtklasse er ${txt3}`);
+            location.reload();
+        } else if (bmi > 30 && bmi < 36) {
+            confirm(`Din bmi er ${bmi} vil du se din vægtklasse?`);
+            confirm(`din vægtklasse er ${txt4}`);
+            location.reload();
+        } else if (bmi > 35 && bmi < 41) {
+            confirm(`Din bmi er ${bmi} vil du se din vægtklasse?`);
+            confirm(`din vægtklasse er ${txt5}`);
+            location.reload();
+        } else if (bmi > 40) {
+            confirm(`Din bmi er ${bmi} vil du se din vægtklasse?`);
+            confirm(`din vægtklasse er ${txt6}`);
+            location.reload();
+        } else if (isNaN(bmi)) {
+            confirm(`Fejl. \n Prøv igen med tal`)
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>
