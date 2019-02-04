@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+    <script>
+        let txt1 = "Undervægtig"
+        let txt2 = "Normal"
+        let txt3 = "Overvægtig"
+        let txt4 = "Fed"
+        let txt5 = "Svær fedme"
+        let txt6 = "Ekstremt fed"
+        let højde = 1.66;
+        let vægt = 68.89;
+        let bmi = vægt / (højde * højde);
+        console.log(bmi);
+        if (bmi < 20) {
+            console.log(txt1);
+        } else if (bmi > 19 && bmi < 26) {
+            console.log(txt2);
+        } else if (bmi > 25 && bmi < 31) {
+            console.log(txt3);
+        } else if (bmi > 30 && bmi < 36) {
+            console.log(txt4);
+        } else if (bmi > 35 && bmi < 41) {
+            console.log(txt5);
+        } else if (bmi > 40) {
+            console.log(txt6);
+        }
+    </script>
+</body>
+
+</html>
