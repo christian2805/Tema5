@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <script>
+        let tal = Math.round(Math.random() * 20);
+        let gæt;
+        let forsøg = 1;
+
+        function gætEtTal() {
+            gæt = prompt("Gæt et tal mellem 0 og 20!");
+            if (gæt == tal) {
+                alert(`Rigtigt!\ndu prøvede ${forsøg} gange`);
+                if (confirm("Vil du prøve igen?")) {
+                    location.reload();
+                }
+            } else if (tal > gæt) {
+                alert("for lavt - prøv igen!");
+                forsøg++;
+                gætEtTal();
+            } else {
+                alert("for højt - prøv igen");
+                forsøg++;
+                gætEtTal();
+            }
+        }
+        gætEtTal();
+
+    </script>
+</body>
+
+</html>
