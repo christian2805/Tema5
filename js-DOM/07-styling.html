@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-indhold</title>
+    <style>
+        .firkant {
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: green;
+        }
+
+        .cirkel {
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            border-radius: 50%;
+            text-align: center;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="firkant"></div>
+    <div class="cirkel"></div>
+
+    <script>
+        let firkantURL = `http://helf-kea.dk/test/frog.png`
+        let cirkelURL = `http://helf-kea.dk/test/gris.png`
+
+
+
+
+        function start() {
+            console.log("start");
+
+            let firkant = document.querySelector(".firkant");
+            let cirkel = document.querySelector(".cirkel");
+
+            firkant.innerHTML = `<img src= ${firkantURL} alt="Lyserød gris">`;
+            cirkel.innerHTML = `<img src= ${cirkelURL} alt="Grøn frø">`;
+
+            firkant.addEventListener("click", flyt);
+            cirkel.addEventListener("click", stop);
+
+            function flyt() {
+                let firkantStart = firkant.innerHTML;
+                firkant.innerHTML = cirkel.innerHTML;
+                cirkel.innerHTML = firkantStart;
+            }
+
+            function stop() {
+                firkant.removeEventListener("click", flyt);
+                firkant.style.backgroundColor = "red";
+                firkant.style.transition = "1.5s";
+                cirkel.style.transform = "scale(0)";
+
+
+            }
+
+
+        }
+        // Functionen skal defineres først og så kaldes senere (her) Måske! :O
+        document.addEventListener("DOMContentLoaded", start);
+    </script>
+</body>
+
+</html>
