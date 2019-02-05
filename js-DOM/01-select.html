@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 select</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script src="script.js"></script>
+
+    <div id="content">
+        <div>
+            <a href="https://kea.dk/">Kea</a>
+        </div>
+
+        <div>
+
+            <a href="https://github.com/mari39fe">Github</a>
+        </div>
+        <div>
+            <img src="http://helf-kea.dk/test/frog.png" alt="frog">
+        </div>
+
+
+    </div>
+
+    <script>
+        let one = document.querySelector("#content");
+        let two = document.querySelector("#content div a");
+        let three = document.querySelector("#content div + div a");
+        let four = document.querySelector("#content div + div + div img");
+        //let four = document.querySelector("#content div:nth-child(3) img");
+        //findes også first child og last child
+
+        console.log(one);
+        console.log(two);
+        console.log(three);
+        console.log(four);
+
+    </script>
+
+</body>
+
+</html>

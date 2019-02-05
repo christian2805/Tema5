@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGI Test</title>
+</head>
+
+<body>
+
+    <script>
+        let points = 5;
+
+
+
+        //        function svar() {
+        //            if (svar1 == "kat") {
+        //                r();
+        //                points++;
+        //                console.log(points)
+        //            } else if (svar1 != "kat") {
+        //                f();
+        //            } else if (svar2 == "hund") {
+        //                r();
+        //                points++;
+        //                console.log(points)
+        //            } else if (svar2 != "hund") {
+        //                f();
+        //            } else if (svar3 == "mig") {
+        //                r();
+        //                points++;
+        //                console.log(points)
+        //            } else if (svar3 == "mig") {
+        //                f();
+        //            } else if (svar4 == "ja") {
+        //                r();
+        //                points++;
+        //                console.log(points)
+        //            } else if (svar4 != "ja") {
+        //                f();
+        //            } else if (svar5 == "mælk") {
+        //                r();
+        //                points++;
+        //                console.log(points)
+        //            } else if (svar5 != "mælk") {
+        //                f();
+        //            }
+        //        }
+        const svar1 = prompt("Hvilket dyr er det bedste?")
+        svar1 == "kat";
+        svar();
+
+        const svar2 = prompt("Hvilket dyr er en vuffer?")
+        svar();
+
+        const svar3 = prompt("Hvem er den bedste?")
+        svar();
+
+        const svar4 = prompt("Kan en hund hoppe?")
+        svar();
+
+        const svar5 = prompt("Hvad hedder det hvide flydende væske?")
+        svar();
+        alert(`Du fik ${points} points, Tillykke`)
+
+        function svar() {
+
+            if (svar1 != true); {
+                points--;
+                alert("nej!");
+            }
+
+        }
+
+        function f() {
+            alert("Forkert")
+        }
+
+        function r() {
+            alert("Rigtigt");
+        }
+    </script>
+</body>
+
+</html>
