@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Boxes</title>
+    <link rel="stylesheet" href="">
+
+
+    <style>
+        #box1,
+        #box2,
+        #box3,
+        #box4 {
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: blue;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div id="box1">
+    </div><br>
+    <div id="box2">
+    </div><br>
+    <div id="box3">
+    </div><br>
+    <div id="box4">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let box1 = document.querySelector("#box1");
+            let box2 = document.querySelector("#box2");
+            let box3 = document.querySelector("#box3");
+            let box4 = document.querySelector("#box4");
+
+            box1.addEventListener("click", function() {
+                box1.style.backgroundColor = "red";
+                box1.style.transition = "0.5s";
+                box1.style.transform = "scale(0.9)";
+            });
+            box2.addEventListener("click", function() {
+                box2.style.backgroundColor = "black";
+                box2.style.transition = "0.5s";
+                box2.style.transform = "rotate(20deg)";
+            });
+            box3.addEventListener("click", function() {
+                box3.style.backgroundColor = "yellow";
+                box3.style.transition = "0.5s";
+                box3.style.transform = "skewY(-30deg)";
+
+            });
+            box4.addEventListener("click", function() {
+                box4.style.backgroundColor = "darkRed";
+                box4.style.transition = "0.5s";
+                box4.style.transform = "translateX(50px)";
+
+            });
+
+
+
+
+
+
+        }
+    </script>
+
+</body>
+
+</html>
