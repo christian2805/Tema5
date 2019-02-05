@@ -34,13 +34,51 @@
     <button id="html">
         html
     </button>
-    <button id="slet">
+    <button id="flyt">
         flyt
     </button>
     <div id="box"></div>
     <div id="bax"></div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let klik = document.querySelector("#klik");
+            let slet = document.querySelector("#slet");
+            let flyt = document.querySelector("#flyt");
+            let html = document.querySelector("#html");
+            let box = document.querySelector("#box");
+            let bax = document.querySelector("#bax");
+
+            flyt.addEventListener("click", flyte);
+
+            function flyte() {
+                let firkantStart = box.innerHTML;
+                box.innerHTML = bax.innerHTML;
+                bax.innerHTML = firkantStart;
+            }
+
+            html.addEventListener("click", function() {
+                box.innerHTML = `<h2> Her er en H2</h2> </br> <p>Her er et p-tag</p>`;
+            });
+            klik.addEventListener("click", txt);
+            slet.addEventListener("click", () => {
+
+                box.innerHTML = "";
+            });
+
+
+            function txt() {
+                console.log("txt");
+                box.innerHTML = "KLIK";
+            }
+
+
+
+
+        }
+
     </script>
 </body>
 
