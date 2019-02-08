@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-Vis Dyr</title>
+</head>
+
+<body>
+    <div id="skriv">
+        <p></p>
+        <img src="" alt="">
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+
+            let dyr = {
+                "navn": "gris",
+                "type": "pattedyr",
+                "billede": "http://helf-kea.dk/test/gris.png",
+                "levested": "svinefarm"
+            }
+            console.log(dyr);
+            let inf = `navn: ${dyr.navn} type: ${dyr.type}  levested: ${dyr.levested}`;
+
+            const divert = document.querySelector("#skriv");
+            divert.querySelector("p").textContent = inf;
+            divert.querySelector("img").src = dyr.billede;
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>

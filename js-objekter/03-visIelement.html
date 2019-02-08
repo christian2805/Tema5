@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-Vis I Element</title>
+</head>
+
+<body>
+    <div id="skriv">
+
+        <h2></h2>
+        <img src="" alt="">
+        <p></p>
+        <p id="p2"></p>
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+
+            let dyr = {
+                "navn": "Gris",
+                "type": "Pattedyr",
+                "billede": "http://helf-kea.dk/test/gris.png",
+                "levested": "Svinefarm"
+            }
+            //console.log(dyr);
+
+            const divert = document.querySelector("#skriv");
+            console.log(divert.querySelector("#p2"));
+
+            divert.querySelector("h2").textContent = dyr.navn;
+            divert.querySelector("img").src = dyr.billede;
+            divert.querySelector("p").textContent = dyr.type;
+            divert.querySelector("#p2").textContent = dyr.levested;
+
+
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>
