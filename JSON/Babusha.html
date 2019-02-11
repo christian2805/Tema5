@@ -46,37 +46,83 @@
 
             }
         }
+
+        .menu {
+            text-align: center;
+
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .valgt {
+            background-color: chartreuse;
+        }
     </style>
 </head>
 
 <body>
+    <header class="menu">
+        <h1>Alle retter</h1>
+        <nav>
+            <button class="filter valgt" data-ret="alle">Alle</button>
+            <button class="filter" data-ret="forretter">Forretter</button>
+            <button class="filter" data-ret="hovedretter">Hovedretter</button>
+            <button class="filter" data-ret="desserter">Desserter</button>
+            <button class="filter" data-ret="drikkevarer">Drikkevarer</button>
+            <button class="filter" data-ret="sideorders">Sideorders</button>
+        </nav>
+    </header>
+    <main>
+        <section id="skriv">
 
-    <div id="skriv">
 
-
-    </div>
+        </section>
+    </main>
+    <footer></footer>
     <script>
         document.addEventListener("DOMContentLoaded", hentJson);
 
         // tomt array
         let ret = [];
-
+        let filter = "alle";
+        let dest = document.querySelector("#skriv");
         async function hentJson() {
-
             let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
             ret = await myJson.json();
+
             udMedret();
         }
 
         function udMedret() {
-            let dest = document.querySelector("#skriv");
+            dest.innerHTML = "";
             ret.forEach(ret => {
-                dest.innerHTML += `<div class="enkelt"> <h3>${ret.navn}</h3><p> ${ret.kategori}</p> <p>Pris: ${ret.pris}.-</p> <p>${ret.kort}</p><p>Oprindelse: ${ret.oprindelse}</p></br><img src="imgs/small/${ret.billede}-sm.jpg" alt="${ret.navn}"></div>`;
+                if (filter == "alle" || filter == ret.kategori) {
+                    dest.innerHTML += `<article class="enkelt"> <h3>${ret.navn}</h3><p> ${ret.kategori}</p> <p>Pris: ${ret.pris}.-</p> <p>${ret.kort}</p><p>Oprindelse: ${ret.oprindelse}</p></br><img src="imgs/small/${ret.billede}-sm.jpg" alt="${ret.navn}"></article>`;
+                }
+            });
+        }
+        document.querySelectorAll(".filter").forEach(elm => {
+            elm.addEventListener("click", filterKat);
+        });
+
+        function filterKat() {
+            console.log("filterKat");
+            filter = this.getAttribute("data-ret");
+            document.querySelector("h1").textContent = this.textContent;
+
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
             })
+            this.classList.add("valgt");
+            console.log("Farve på!");
+            udMedret();
         }
     </script>
 
 </body>
 
 </html>
-s
+tro på det!

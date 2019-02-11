@@ -61,6 +61,7 @@
         .valgt {
             background-color: chartreuse;
         }
+
     </style>
 </head>
 
@@ -94,7 +95,6 @@
                 return a.navn.localeCompare(b.navn);
             });
             udMedDyr();
-
         }
 
         function udMedDyr() {
@@ -104,7 +104,7 @@
                     dest.innerHTML += `
 <article class="person"> <h2>${dyr.navn}</h2><img class="billede" src="${dyr.billede}" alt="${dyr.navn}"><p>hold: ${dyr.hold}</p> <p>Alder: ${dyr.alder}</p></article>`;
                 }
-            })
+            });
 
         }
         document.querySelectorAll(".filter").forEach(elm => {
@@ -121,6 +121,7 @@
             udMedDyr();
 
         }
+
     </script>
 
 </body>
