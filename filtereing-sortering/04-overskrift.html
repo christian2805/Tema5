@@ -12,6 +12,7 @@
         }
 
         #skriv {
+
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             background-color: #2196F3;
@@ -47,17 +48,24 @@
             }
         }
 
+        .menu {
+            text-align: center;
+
+
+        }
+
         .valgt {
             background-color: chartreuse;
         }
-
     </style>
 </head>
 
 <body>
+    <h1>Alle</h1>
     <div class="menu">
+
         <button class="filter" data-hold="alle">Alle</button>
-        <button class="filter valgt" data-hold="a">Hold A</button>
+        <button class="filter" data-hold="a">Hold A</button>
         <button class="filter" data-hold="b">Hold B</button>
     </div>
     <div id="skriv">
@@ -69,33 +77,35 @@
 
         // tomt array
         let dyr = [];
-        let filter = "a";
+        let filter = "alle";
         let dest = document.querySelector("#skriv");
         async function hentJson() {
-
             let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
             dyr = await myJson.json();
             udMedDyr();
 
-
         }
 
         function udMedDyr() {
+            dest.innerHTML = "";
             dyr.forEach(dyr => {
-                if (dyr.hold == filter) {
+                if (filter == "alle" || filter == dyr.hold) {
                     dest.innerHTML += `
-<div class="enkelt"> <h2>${dyr.navn}</h2><img class="billede" src="${dyr.billede}" alt="${dyr.navn}"><p>hold: ${dyr.hold}</p>`
+<div class="enkelt"> <h2>${dyr.navn}</h2><img class="billede" src="${dyr.billede}" alt="${dyr.navn}"><p>hold: ${dyr.hold}</p>`;
                 }
             })
+
         }
+        document.querySelectorAll(".filter").forEach(elm => {
+            elm.addEventListener("click", filtering);
+        })
 
-        //        function udMedDyr() {
+        function filtering() {
+            filter = this.getAttribute("data-hold");
+            document.querySelector("h1").textContent = this.textContent;
+            udMedDyr();
 
-        //            dyr.forEach(dyr => {
-        //                dest.innerHTML += `<div class="enkelt"><h3>${dyr.navn}</h3> <a href="https://github.com/${dyr.github}" target="_blank"> Github: ${dyr.github}</a></br><img src=${dyr.billede} alt="${dyr.navn}">  <p>${dyr.alder}</p> <p>fra ${dyr.email}</p> <p>${dyr.hold}</p></div>`;
-        //            })
-        //        }
-
+        }
     </script>
 
 </body>
