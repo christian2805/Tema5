@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-dyrIJson</title>
+
+    <style>
+        img {
+            width: 75%;
+        }
+
+        #skriv {
+
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            background-color: #2196F3;
+
+        }
+
+        .person {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            font-size: 30px;
+            text-align: center;
+        }
+
+        @media(min-width:700px) {
+
+            #skriv {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                background-color: #2196F3;
+                grid-gap: 1vw;
+
+            }
+        }
+
+        @media(min-width:1200px) {
+
+            #skriv {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                background-color: #2196F3;
+                grid-gap: 1vw;
+
+            }
+        }
+
+        .menu {
+            text-align: center;
+
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .valgt {
+            background-color: chartreuse;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Alle</h1>
+    <header class="menu">
+        <nav>
+            <button class="filter valgt" data-hold="alle">Alle</button>
+            <button class="filter" data-hold="a">Hold A</button>
+            <button class="filter" data-hold="b">Hold B</button>
+            <button class="filter" data-køn="b">Mand</button>
+            <button class="filter" data-køn="b">Kvinde</button>
+            <button class="filterned" data-alder="ned">Alder faldende</button>
+        </nav>
+    </header>
+    <main>
+        <section id="skriv">
+
+        </section>
+    </main>
+    <footer></footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        // tomt array
+        let dyr = [];
+        let filter = "alle";
+        let dest = document.querySelector("#skriv");
+        async function hentJson() {
+            let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+            dyr = await myJson.json();
+            //sortere efter alfabetisk orden a -> b
+            dyr.sort((a, b) => {
+                return a.navn.localeCompare(b.navn);
+            });
+            udMedDyr();
+
+        }
+
+        function udMedDyr() {
+            dest.innerHTML = "";
+            dyr.forEach(dyr => {
+                if (filter == "alle" || filter == dyr.hold) {
+                    dest.innerHTML += `
+<article class="person"> <h2>${dyr.navn}</h2><img class="billede" src="${dyr.billede}" alt="${dyr.navn}"><p>hold: ${dyr.hold}</p> <p>Alder: ${dyr.alder}</p></article>`;
+                }
+            })
+
+        }
+        document.querySelectorAll(".filter").forEach(elm => {
+            elm.addEventListener("click", filtering);
+
+        });
+        document.querySelector(".filterNed").addEventListener("click", filteringNed);
+
+        function filteringNed() {
+
+            filter = this.getAttribute("data-alder");
+            document.querySelector("h1").textContent = this.textContent;
+            document.querySelectorAll(".filterned").forEach(elm => {
+                    elm.classList.remove("valgt");
+                    dyr.sort((a, b) => {
+                        return a.alder - b.alder
+                    })
+
+
+                    udMedDyr();
+                }
+            }
+
+            function filtering() {
+                filter = this.getAttribute("data-hold");
+                document.querySelector("h1").textContent = this.textContent;
+                document.querySelectorAll(".filter").forEach(elm => {
+                    elm.classList.remove("valgt");
+                });
+                this.classList.add("valgt");
+                udMedDyr();
+
+
+            }
+    </script>
+
+</body>
+
+</html>
