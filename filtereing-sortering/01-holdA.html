@@ -50,6 +50,11 @@
 </head>
 
 <body>
+    <div class="menu">
+        <button class="filter" data-hold="alle">Alle</button>
+        <button class="filter" data-hold="a">Hold A</button>
+        <button class="filter" data-hold="b">Hold B</button>
+    </div>
     <div id="skriv">
 
 
@@ -59,20 +64,32 @@
 
         // tomt array
         let dyr = [];
-
+        let filter = "a";
+        let dest = document.querySelector("#skriv");
         async function hentJson() {
 
             let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
             dyr = await myJson.json();
             udMedDyr();
+
+
         }
 
         function udMedDyr() {
-            let dest = document.querySelector("#skriv");
             dyr.forEach(dyr => {
-                dest.innerHTML += `<div class="enkelt"><h3>${dyr.navn}</h3> <a href="https://github.com/${dyr.github}" target="_blank"> Github: ${dyr.github}</a></br><img src=${dyr.billede} alt="${dyr.navn}">  <p>${dyr.alder}</p> <p>fra ${dyr.email}</p> <p>${dyr.hold}</p></div>`;
+                if (dyr.hold == filter) {
+                    dest.innerHTML += `
+<div class="enkelt"> <h2>${dyr.navn}</h2><img class="billede" src="${dyr.billede}" alt="${dyr.navn}"><p>hold: ${dyr.hold}</p>`
+                }
             })
         }
+
+        //        function udMedDyr() {
+
+        //            dyr.forEach(dyr => {
+        //                dest.innerHTML += `<div class="enkelt"><h3>${dyr.navn}</h3> <a href="https://github.com/${dyr.github}" target="_blank"> Github: ${dyr.github}</a></br><img src=${dyr.billede} alt="${dyr.navn}">  <p>${dyr.alder}</p> <p>fra ${dyr.email}</p> <p>${dyr.hold}</p></div>`;
+        //            })
+        //        }
     </script>
 
 </body>

@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01-dyrIJson</title>
+    <title>Babusha</title>
 
     <style>
         img {
-            width: 50%;
+            width: 75%;
         }
 
         #skriv {
@@ -50,6 +50,7 @@
 </head>
 
 <body>
+
     <div id="skriv">
 
 
@@ -58,19 +59,19 @@
         document.addEventListener("DOMContentLoaded", hentJson);
 
         // tomt array
-        let dyr = [];
+        let ret = [];
 
         async function hentJson() {
 
-            let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
-            dyr = await myJson.json();
-            udMedDyr();
+            let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+            ret = await myJson.json();
+            udMedret();
         }
 
-        function udMedDyr() {
+        function udMedret() {
             let dest = document.querySelector("#skriv");
-            dyr.forEach(dyr => {
-                dest.innerHTML += `<div class="enkelt"><h3>${dyr.navn}</h3> <a href="https://github.com/${dyr.github}" target="_blank"> Github: ${dyr.github}</a></br><img src=${dyr.billede} alt="${dyr.navn}">  <p>${dyr.alder}</p> <p>fra ${dyr.email}</p> <p>${dyr.hold}</p></div>`;
+            ret.forEach(ret => {
+                dest.innerHTML += `<div class="enkelt"> <h3>${ret.navn}</h3><p> ${ret.kategori}</p> <p>Pris: ${ret.pris}.-</p> <p>${ret.kort}</p><p>Oprindelse: ${ret.oprindelse}</p></br><img src="imgs/small/${ret.billede}-sm.jpg" alt="${ret.navn}"></div>`;
             })
         }
     </script>
@@ -78,3 +79,4 @@
 </body>
 
 </html>
+s
