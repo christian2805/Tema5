@@ -18,12 +18,7 @@
 
         }
 
-        .enkelt {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.8);
-            font-size: 30px;
-            text-align: center;
-        }
+
 
         @media(min-width:700px) {
 
@@ -45,6 +40,13 @@
                 grid-gap: 1vw;
 
             }
+        }
+
+        .enkelt {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            font-size: 30px;
+            text-align: center;
         }
 
         .menu {
@@ -96,12 +98,7 @@
 </head>
 
 <body>
-    <div id="popup">
-        <div id="luk">
-            <button> X </button>
-            <div id="indhold"></div>
-        </div>
-    </div>
+
     <header class="menu">
         <h1>Alle retter</h1>
         <nav>
@@ -143,14 +140,15 @@
                     // insertAdjecentHTML kan bruges sammen med eventlistener
                     dest.insertAdjacentHTML("beforeend", template);
                     dest.lastElementChild.addEventListener("click", () => {
-                        visSingle(ret);
+                        location.href = "babusha-single.html?id=" +
+                            ret.id;
                     });
                 }
             });
         }
 
         function visSingle(ret) {
-            document.querySelector("#indhold").innerHTML = `<article class="person"> <h2>${ret.navn}</h2><img src="imgs/large/${ret.billede}.jpg" alt="${ret.navn}"><p>Pris: ${ret.pris},-</p> <p>Beskrivelse: ${ret.lang}</p></article>`;
+            document.querySelector("#skriv").innerHTML = `<article class="enkelt"> <h2>${ret.navn}</h2><img src="imgs/large/${ret.billede}.jpg" alt="${ret.navn}"><p>Pris: ${ret.pris},-</p> <p>Beskrivelse: ${ret.lang}</p></article>`;
             document.querySelector("#popup").style.display = "block";
             document.querySelector("#popup #luk").addEventListener("click", close);
 
@@ -158,22 +156,6 @@
 
         function close() {
             document.querySelector("#popup").style.display = "none";
-        }
-
-        document.querySelectorAll(".filter").forEach(elm => {
-            elm.addEventListener("click", filterKat);
-        });
-
-        function filterKat() {
-            console.log("filterKat");
-            filter = this.getAttribute("data-ret");
-            document.querySelector("h1").textContent = this.textContent;
-            document.querySelectorAll(".filter").forEach(elm => {
-                elm.classList.remove("valgt");
-            });
-            this.classList.add("valgt");
-            console.log("Farve på!");
-            udMedret();
         }
 
     </script>

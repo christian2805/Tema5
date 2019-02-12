@@ -96,9 +96,9 @@
 
     <div id="single">
         <div id="tilbage">
-            <button> X </button>
+            <button>
+                << </button> </div> <div id="indhold">
         </div>
-        <div id="indhold"></div>
     </div>
 
     <footer></footer>
@@ -126,14 +126,10 @@
             dest.innerHTML = "";
             ret.forEach(ret => {
                 if (id == ret.id) {
-                    let template = `
-<article class="ret"> <h2>${ret.navn}</h2><img class="billede" src="${ret.billede}" alt="${ret.navn}"><p>hold: ${ret.hold}</p> <p>Alder: ${ret.alder}</p></article>`;
+                    let template = `<article class="ret"> <h2>${ret.navn}</h2><img class="billede" src="imgs/large/${ret.billede}.jpg" alt="${ret.navn}"><p>Pris: ${ret.pris},-</p><p>Beskrivelse: ${ret.lang}</p> <p>Oprindelse: ${ret.oprindelse}</p> </article>`;
                     dest.insertAdjacentHTML("beforeend", template);
 
-                    function visSingle() {
-                        document.querySelector("#indhold").innerHTML = `<article class="ret"> <h2>${ret.navn}</h2><img class="billede" src="${ret.billede}" alt="${ret.navn}"><p>hold: ${ret.hold}</p> <p>Alder: ${ret.alder}</p> <p>${ret.historie} </p></article>`;
-                        document.querySelector("#popup").style.display = "block";
-                    }
+
                 }
             });
         }
