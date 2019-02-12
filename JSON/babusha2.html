@@ -146,6 +146,22 @@
                 }
             });
         }
+        document.querySelectorAll(".filter").forEach(elm => {
+            elm.addEventListener("click", filterKat);
+        });
+
+        function filterKat() {
+            console.log("filterKat");
+            filter = this.getAttribute("data-ret");
+            document.querySelector("h1").textContent = this.textContent;
+
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
+            });
+            this.classList.add("valgt");
+            console.log("Farve på!");
+            udMedret();
+        }
 
         function visSingle(ret) {
             document.querySelector("#skriv").innerHTML = `<article class="enkelt"> <h2>${ret.navn}</h2><img src="imgs/large/${ret.billede}.jpg" alt="${ret.navn}"><p>Pris: ${ret.pris},-</p> <p>Beskrivelse: ${ret.lang}</p></article>`;
