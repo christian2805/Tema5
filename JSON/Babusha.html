@@ -8,7 +8,7 @@
 
     <style>
         img {
-            width: 75%;
+            width: 50%;
         }
 
         #skriv {
@@ -60,10 +60,53 @@
         .valgt {
             background-color: chartreuse;
         }
+
+
+
+        #popup {
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+
+            display: none;
+
+
+
+        }
+
+        #indhold {
+            min-height: 50vh;
+            background-color: azure;
+            width: 70vw;
+            margin: 0 auto;
+
+
+        }
+
+        #luk {
+            top: 1vw;
+            right: 2rem;
+            padding-right: 2rem;
+            position: fixed;
+
+        }
+
+        #luk button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
+    <div id="popup">
+        <div id="luk">
+            <button> X </button>
+            <div id="indhold"></div>
+        </div>
+    </div>
     <header class="menu">
         <h1>Alle retter</h1>
         <nav>
@@ -100,10 +143,28 @@
             dest.innerHTML = "";
             ret.forEach(ret => {
                 if (filter == "alle" || filter == ret.kategori) {
-                    dest.innerHTML += `<article class="enkelt"> <h3>${ret.navn}</h3><p> ${ret.kategori}</p> <p>Pris: ${ret.pris}.-</p> <p>${ret.kort}</p><p>Oprindelse: ${ret.oprindelse}</p></br><img src="imgs/small/${ret.billede}-sm.jpg" alt="${ret.navn}"></article>`;
+                    let template =
+                        `<article class="enkelt"> <h3>${ret.navn}</h3><p> ${ret.kategori}</p> <p>Pris: ${ret.pris}.-</p> <p>${ret.kort}</p><p>Oprindelse: ${ret.oprindelse}</p></br><img src="imgs/small/${ret.billede}-sm.jpg" alt="${ret.navn}"></article>`;
+                    // insertAdjecentHTML kan bruges sammen med eventlistener
+                    dest.insertAdjacentHTML("beforeend", template);
+                    dest.lastElementChild.addEventListener("click", () => {
+                        visSingle(ret);
+                    });
                 }
             });
         }
+
+        function visSingle(ret) {
+            document.querySelector("#indhold").innerHTML = `<article class="person"> <h2>${ret.navn}</h2><img src="imgs/large/${ret.billede}.jpg" alt="${ret.navn}"><p>Pris: ${ret.pris},-</p> <p>Beskrivelse: ${ret.lang}</p></article>`;
+            document.querySelector("#popup").style.display = "block";
+            document.querySelector("#popup #luk").addEventListener("click", close);
+
+        }
+
+        function close() {
+            document.querySelector("#popup").style.display = "none";
+        }
+
         document.querySelectorAll(".filter").forEach(elm => {
             elm.addEventListener("click", filterKat);
         });
