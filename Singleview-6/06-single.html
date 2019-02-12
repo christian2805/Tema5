@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-personerIJson</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #single {
+            background-color: hsla(0, 15%, 48%, 0.5);
+        }
+
+        #indhold {
+            min-height: 50vh;
+            background-color: white;
+            width: 70vw;
+            margin: 4rem auto;
+        }
+
+        #tilbage {
+            right: 2rem;
+            padding-right: 2rem;
+        }
+
+        #tilbage button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+        }
+
+        #tilbage button:hover {
+            cursor: pointer;
+        }
+
+        img {
+            width: 75%;
+        }
+
+        #skriv {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            background-color: #2196F3;
+        }
+
+        .person {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            font-size: 30px;
+            text-align: center;
+        }
+
+        @media(min-width:700px) {
+            #skriv {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                background-color: #2196F3;
+                grid-gap: 1vw;
+            }
+        }
+
+        @media(min-width:1200px) {
+            #skriv {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                background-color: #2196F3;
+                grid-gap: 1vw;
+            }
+        }
+
+        .menu {
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .valgt {
+            background-color: chartreuse;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="single">
+        <div id="tilbage">
+            <button> X </button>
+        </div>
+        <div id="indhold"></div>
+    </div>
+
+    <footer></footer>
+    <script>
+        let urlParams = new URLSearchParams(window.location.search)
+        let github = urlParams.get("github");
+        console.log(github);
+        document.addEventListener("DOMContentLoaded", hentJson);
+        // tomt array
+        let person = [];
+        let filter = "alle";
+        let dest = document.querySelector("#indhold");
+        async function hentJson() {
+            let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+            person = await myJson.json();
+            //sortere efter alfabetisk orden a -> b
+            person.sort((a, b) => {
+                return a.navn.localeCompare(b.navn);
+            });
+            visPersoner();
+        }
+
+        function visPersoner() {
+            let dest = document.querySelector("#indhold");
+            dest.innerHTML = "";
+            person.forEach(person => {
+                if (github == person.github) {
+                    let template = `
+<article class="person"> <h2>${person.navn}</h2><img class="billede" src="${person.billede}" alt="${person.navn}"><p>hold: ${person.hold}</p> <p>Alder: ${person.alder}</p></article>`;
+                    dest.insertAdjacentHTML("beforeend", template);
+
+                    function visSingle() {
+                        document.querySelector("#indhold").innerHTML = `<article class="person"> <h2>${person.navn}</h2><img class="billede" src="${person.billede}" alt="${person.navn}"><p>hold: ${person.hold}</p> <p>Alder: ${person.alder}</p> <p>${person.historie} </p></article>`;
+                        document.querySelector("#popup").style.display = "block";
+                    }
+                }
+            });
+        }
+        hentJson();
+        document.querySelector("#tilbage button").addEventListener("click", () => {
+            location.href = "05-kald.html"
+        })
+    </script>
+
+</body>
+
+</html>
