@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-dyrIJson</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 75%;
+        }
+
+        #skriv {
+
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            background-color: #2196F3;
+
+        }
+
+        .person {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            font-size: 30px;
+            text-align: center;
+        }
+
+        @media(min-width:700px) {
+
+            #skriv {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                background-color: #2196F3;
+                grid-gap: 1vw;
+
+            }
+        }
+
+        @media(min-width:1200px) {
+
+            #skriv {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                background-color: #2196F3;
+                grid-gap: 1vw;
+
+            }
+        }
+
+        .menu {
+            text-align: center;
+
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .valgt {
+            background-color: chartreuse;
+        }
+
+        #popup {
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            display: none;
+            overflow: scroll;
+
+
+        }
+
+        #indhold {
+            min-height: 50vh;
+            background-color: azure;
+            width: 70vw;
+            margin: 0 auto;
+        }
+
+        #luk {
+            top: 1vw;
+            right: 2rem;
+            padding-right: 2rem;
+            position: fixed;
+
+        }
+
+        #luk button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="popup">
+        <div id="luk">
+            <button> X </button>
+            <div id="indhold"></div>
+        </div>
+    </div>
+    <header class="menu">
+        <h1>Alle</h1>
+        <nav>
+            <button class="filter valgt" data-hold="alle">Alle</button>
+            <button class="filter" data-hold="a">Hold A</button>
+            <button class="filter" data-hold="b">Hold B</button>
+        </nav>
+    </header>
+    <main>
+        <section id="skriv">
+
+        </section>
+    </main>
+    <footer></footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        // tomt array
+        let dyr = [];
+        let filter = "alle";
+        let dest = document.querySelector("#skriv");
+        async function hentJson() {
+            let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+            dyr = await myJson.json();
+            //sortere efter alfabetisk orden a -> b
+            dyr.sort((a, b) => {
+                return a.navn.localeCompare(b.navn);
+            });
+            udMedDyr();
+        }
+
+        function udMedDyr() {
+            dest.innerHTML = "";
+            dyr.forEach(dyr => {
+                if (filter == "alle" || filter == dyr.hold) {
+                    let template = `
+<article class="person"> <h2>${dyr.navn}</h2><img class="billede" src="${dyr.billede}" alt="${dyr.navn}"><p>hold: ${dyr.hold}</p> <p>Alder: ${dyr.alder}</p></article>`;
+                    // insertAdjecentHTML kan bruges sammen med eventlistener
+                    dest.insertAdjacentHTML("beforeend", template);
+                    dest.lastElementChild.addEventListener("click", () => {
+                        visSingle(dyr);
+                    });
+
+                }
+            });
+
+        }
+
+        function visSingle(dyr) {
+            document.querySelector("#indhold").innerHTML = `<article class="person"> <h2>${dyr.navn}</h2><img class="billede" src="${dyr.billede}" alt="${dyr.navn}"><p>hold: ${dyr.hold}</p> <p>Alder: ${dyr.alder}</p></article>`;
+            document.querySelector("#popup").style.display = "block";
+            document.querySelector("#popup #luk").addEventListener("click", close);
+
+        }
+
+
+        function close() {
+            document.querySelector("#popup").style.display = "none";
+        }
+
+
+        document.querySelectorAll(".filter").forEach(elm => {
+            elm.addEventListener("click", filtering);
+        });
+
+        function filtering() {
+            filter = this.getAttribute("data-hold");
+            document.querySelector("h1").textContent = this.textContent;
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
+            });
+            this.classList.add("valgt");
+            udMedDyr();
+
+        }
+    </script>
+
+</body>
+
+</html>
