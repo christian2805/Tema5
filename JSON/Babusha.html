@@ -68,28 +68,22 @@
             width: 100vw;
             height: 100vh;
             position: fixed;
-
+            background-color: hsla(0, 15%, 48%, 0.5);
+            overflow: scroll;
             display: none;
-
-
-
         }
 
         #indhold {
             min-height: 50vh;
-            background-color: azure;
+            background-color: white;
             width: 70vw;
-            margin: 0 auto;
-
-
+            margin: 4rem auto;
         }
 
         #luk {
-            top: 1vw;
+            position: fixed;
             right: 2rem;
             padding-right: 2rem;
-            position: fixed;
-
         }
 
         #luk button {
@@ -176,7 +170,7 @@
 
             document.querySelectorAll(".filter").forEach(elm => {
                 elm.classList.remove("valgt");
-            })
+            });
             this.classList.add("valgt");
             console.log("Farve på!");
             udMedret();
