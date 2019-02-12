@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01-personerIJson</title>
+    <title>01-reterIJson</title>
 
     <style>
         body {
@@ -16,14 +16,8 @@
             box-sizing: border-box;
         }
 
-        #popup {
-            top: 0;
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
+        #single {
             background-color: hsla(0, 15%, 48%, 0.5);
-            overflow: scroll;
-            display: none;
         }
 
         #indhold {
@@ -33,18 +27,17 @@
             margin: 4rem auto;
         }
 
-        #luk {
-            position: fixed;
+        #tilbage {
             right: 2rem;
             padding-right: 2rem;
         }
 
-        #luk button {
+        #tilbage button {
             font-size: 2rem;
             padding: 1rem 2rem;
         }
 
-        #luk button:hover {
+        #tilbage button:hover {
             cursor: pointer;
         }
 
@@ -58,7 +51,7 @@
             background-color: #2196F3;
         }
 
-        .person {
+        .ret {
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(0, 0, 0, 0.8);
             font-size: 30px;
@@ -101,70 +94,53 @@
 <body>
 
 
-    <div id="popup">
-        <div id="luk">
+    <div id="single">
+        <div id="tilbage">
             <button> X </button>
         </div>
         <div id="indhold"></div>
     </div>
 
-
-    <h1>Alle</h1>
-    <header class="menu">
-        <nav>
-            <button class="filter valgt" data-hold="alle">Alle</button>
-            <button class="filter" data-hold="a">Hold A</button>
-            <button class="filter" data-hold="b">Hold B</button>
-        </nav>
-    </header>
-    <main>
-        <section id="skriv">
-
-        </section>
-    </main>
     <footer></footer>
     <script>
+        let urlParams = new URLSearchParams(window.location.search)
+        let id = urlParams.get("id");
+        console.log(id);
         document.addEventListener("DOMContentLoaded", hentJson);
         // tomt array
-        let person = [];
+        let ret = [];
         let filter = "alle";
-        let dest = document.querySelector("#skriv");
+        let dest = document.querySelector("#indhold");
         async function hentJson() {
-            let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
-            person = await myJson.json();
+            let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+            ret = await myJson.json();
             //sortere efter alfabetisk orden a -> b
-            person.sort((a, b) => {
+            ret.sort((a, b) => {
                 return a.navn.localeCompare(b.navn);
             });
-            visPersoner();
+            visreter();
         }
 
-        function visPersoner() {
+        function visreter() {
+            let dest = document.querySelector("#indhold");
             dest.innerHTML = "";
-            person.forEach(person => {
-                if (filter == "alle" || filter == person.hold) {
+            ret.forEach(ret => {
+                if (id == ret.id) {
                     let template = `
-<article class="person"> <h2>${person.navn}</h2><img class="billede" src="${person.billede}" alt="${person.navn}"><p>hold: ${person.hold}</p> <p>Alder: ${person.alder}</p></article>`;
-                    // insertAdjecentHTML kan bruges sammen med eventlistener
+<article class="ret"> <h2>${ret.navn}</h2><img class="billede" src="${ret.billede}" alt="${ret.navn}"><p>hold: ${ret.hold}</p> <p>Alder: ${ret.alder}</p></article>`;
                     dest.insertAdjacentHTML("beforeend", template);
-                    dest.lastElementChild.addEventListener("click", () => {
-                        location.href = "06-single.html?github=" + person.github;
-                    });
+
+                    function visSingle() {
+                        document.querySelector("#indhold").innerHTML = `<article class="ret"> <h2>${ret.navn}</h2><img class="billede" src="${ret.billede}" alt="${ret.navn}"><p>hold: ${ret.hold}</p> <p>Alder: ${ret.alder}</p> <p>${ret.historie} </p></article>`;
+                        document.querySelector("#popup").style.display = "block";
+                    }
                 }
             });
         }
-
-
-
-        function visSingle(person) {
-            document.querySelector("#indhold").innerHTML = `<article class="person"> <h2>${person.navn}</h2><img class="billede" src="${person.billede}" alt="${person.navn}"><p>hold: ${person.hold}</p> <p>Alder: ${person.alder}</p> <p>${person.historie} </p></article>`;
-            document.querySelector("#popup").style.display = "block";
-            document.querySelector("#popup #luk").addEventListener("click", close);
-        }
-
-        function close() {
-            document.querySelector("#popup").style.display = "none";
-        }
+        hentJson();
+        document.querySelector("#tilbage button").addEventListener("click", () => {
+            location.href = "babusha2.html"
+        })
 
     </script>
 
