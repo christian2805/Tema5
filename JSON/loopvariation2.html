@@ -100,7 +100,6 @@
         .filter:hover {
             background-color: rgba(55, 223, 253, 0.89);
         }
-
     </style>
 </head>
 
@@ -129,10 +128,11 @@
     </main>
     <footer></footer>
     <script>
-        // venter på at html strukturen er loaded før den påvirker det med javascript. for at undgå fejl, ----bruges mest til store sider
         document.addEventListener("DOMContentLoaded", hentJson);
 
         // tomt array
+        console.log(document.querySelectorAll("#skriv"));
+        let do = document.querySelector()
         let retter = [];
         let filter = "alle";
         let dest = document.querySelector("#skriv");
@@ -147,15 +147,23 @@
         function udMedret() {
             // siger at htmlen skal være tom og fylder det derefter
             dest.innerHTML = "";
-            // her siger vi at hver af elementerne i retter hedder ret. Nu ved den det!
+
+
+
+            // her siger vi at hver af elementerne i retter hedder ret og har nr i
             retter.forEach(ret => {
+
+
+
                 if (filter == "alle" || filter == ret.kategori) {
                     let template =
                         `<article class="enkelt"> <h3>${ret.navn}</h3><p> ${ret.kategori}</p> <p>Pris: ${ret.pris}.-</p> <p>${ret.kort}</p><p>Oprindelse: ${ret.oprindelse}</p></br><img src="imgs/small/${ret.billede}-sm.jpg" alt="${ret.navn}"></article>`;
                     // insertAdjecentHTML kan bruges sammen med eventlistener
                     dest.insertAdjacentHTML("beforeend", template);
-                    // hvert element kommer til at være det sidste, da de bliver smidt ind en af gangen, SMART!
-                    dest.lastElementChild.addEventListener("click", () => {
+
+
+                    // på samme måde som med lastelementChild bare med css
+                    dest.querySelector(".enkelt:last-child").addEventListener("click", () => {
                         visSingle(ret);
                     });
                 }
@@ -176,10 +184,9 @@
         document.querySelectorAll(".filter").forEach(elm => {
             elm.addEventListener("click", filterKat);
         });
-        // her filtrere vi arrayet efter hvilken knap der er trykket på
+
         function filterKat() {
             console.log("filterKat");
-            // data- bruges til at gemme info, og kan hentes ved getAttribute
             filter = this.getAttribute("data-ret");
             document.querySelector("h1").textContent = this.textContent;
 
@@ -190,7 +197,6 @@
             console.log("Farve på!");
             udMedret();
         }
-
     </script>
 
 </body>

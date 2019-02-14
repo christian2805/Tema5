@@ -100,7 +100,6 @@
         .filter:hover {
             background-color: rgba(55, 223, 253, 0.89);
         }
-
     </style>
 </head>
 
@@ -129,68 +128,12 @@
     </main>
     <footer></footer>
     <script>
-        // venter på at html strukturen er loaded før den påvirker det med javascript. for at undgå fejl, ----bruges mest til store sider
-        document.addEventListener("DOMContentLoaded", hentJson);
-
-        // tomt array
-        let retter = [];
-        let filter = "alle";
-        let dest = document.querySelector("#skriv");
-        async function hentJson() {
-            //henter array info fra onlie skema
-            let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
-            retter = await myJson.json();
-
-            udMedret();
+        function🙂(sel) {
+            let result = document.querySelector(sel);
+            return result;
         }
-
-        function udMedret() {
-            // siger at htmlen skal være tom og fylder det derefter
-            dest.innerHTML = "";
-            // her siger vi at hver af elementerne i retter hedder ret. Nu ved den det!
-            retter.forEach(ret => {
-                if (filter == "alle" || filter == ret.kategori) {
-                    let template =
-                        `<article class="enkelt"> <h3>${ret.navn}</h3><p> ${ret.kategori}</p> <p>Pris: ${ret.pris}.-</p> <p>${ret.kort}</p><p>Oprindelse: ${ret.oprindelse}</p></br><img src="imgs/small/${ret.billede}-sm.jpg" alt="${ret.navn}"></article>`;
-                    // insertAdjecentHTML kan bruges sammen med eventlistener
-                    dest.insertAdjacentHTML("beforeend", template);
-                    // hvert element kommer til at være det sidste, da de bliver smidt ind en af gangen, SMART!
-                    dest.lastElementChild.addEventListener("click", () => {
-                        visSingle(ret);
-                    });
-                }
-            });
-        }
-
-        function visSingle(ret) {
-            document.querySelector("#indhold").innerHTML = `<article class="enkelt"> <h2>${ret.navn}</h2><img src="imgs/large/${ret.billede}.jpg" alt="${ret.navn}"><p>Pris: ${ret.pris},-</p> <p>Oprindelse: ${ret.oprindelse}</p> <p>Beskrivelse: ${ret.lang}</p></article>`;
-            document.querySelector("#popup").style.display = "block";
-            document.querySelector("#popup #luk").addEventListener("click", close);
-
-        }
-
-        function close() {
-            document.querySelector("#popup").style.display = "none";
-        }
-
-        document.querySelectorAll(".filter").forEach(elm => {
-            elm.addEventListener("click", filterKat);
-        });
-        // her filtrere vi arrayet efter hvilken knap der er trykket på
-        function filterKat() {
-            console.log("filterKat");
-            // data- bruges til at gemme info, og kan hentes ved getAttribute
-            filter = this.getAttribute("data-ret");
-            document.querySelector("h1").textContent = this.textContent;
-
-            document.querySelectorAll(".filter").forEach(elm => {
-                elm.classList.remove("valgt");
-            });
-            this.classList.add("valgt");
-            console.log("Farve på!");
-            udMedret();
-        }
-
+        let forsog = 🙂("#popup");
+        console.log(forsog)
     </script>
 
 </body>
