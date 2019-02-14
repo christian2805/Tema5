@@ -8,17 +8,23 @@
 
     <style>
         img {
-            width: 50%;
+            width: 75%;
         }
 
         #skriv {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             background-color: #2196F3;
+            margin: 0 auto;
 
         }
 
-
+        .enkelt {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            font-size: 30px;
+            text-align: center;
+        }
 
         @media(min-width:700px) {
 
@@ -27,7 +33,6 @@
                 grid-template-columns: repeat(2, 1fr);
                 background-color: #2196F3;
                 grid-gap: 1vw;
-
             }
         }
 
@@ -38,21 +43,11 @@
                 grid-template-columns: repeat(3, 1fr);
                 background-color: #2196F3;
                 grid-gap: 1vw;
-
             }
-        }
-
-        .enkelt {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.8);
-            font-size: 30px;
-            text-align: center;
         }
 
         .menu {
             text-align: center;
-
-
         }
 
         h1 {
@@ -60,17 +55,15 @@
         }
 
         .valgt {
-            background-color: chartreuse;
+            background-color: #2196F3;
         }
-
-
 
         #popup {
             top: 0;
             width: 100vw;
             height: 100vh;
             position: fixed;
-            background-color: hsla(0, 15%, 48%, 0.5);
+            background-color: hsla(0, 25%, 48%, 0.5);
             overflow: scroll;
             display: none;
         }
@@ -80,19 +73,34 @@
             background-color: white;
             width: 70vw;
             margin: 4rem auto;
+            position: absolute;
+            right: 10vw;
+
         }
 
         #luk {
             position: fixed;
-            right: 2rem;
+            right: 10vw;
             padding-right: 2rem;
+            z-index: 10;
         }
 
         #luk button {
-            font-size: 2rem;
+            font-size: 3rem;
             padding: 1rem 2rem;
             cursor: pointer;
         }
+
+        .filter {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            margin: 0 1vw 1vw 0;
+        }
+
+        .filter:hover {
+            background-color: rgba(55, 223, 253, 0.89);
+        }
+
     </style>
 </head>
 
@@ -172,9 +180,9 @@
         function close() {
             document.querySelector("#popup").style.display = "none";
         }
+
     </script>
 
 </body>
 
 </html>
-
