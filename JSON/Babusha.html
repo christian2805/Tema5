@@ -8,13 +8,14 @@
 
     <style>
         img {
-            width: 50%;
+            width: 75%;
         }
 
         #skriv {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             background-color: #2196F3;
+            margin: 0 auto;
 
         }
 
@@ -54,7 +55,7 @@
         }
 
         .valgt {
-            background-color: chartreuse;
+            background-color: #2196F3;
         }
 
         #popup {
@@ -62,7 +63,7 @@
             width: 100vw;
             height: 100vh;
             position: fixed;
-            background-color: hsla(0, 15%, 48%, 0.5);
+            background-color: hsla(0, 25%, 48%, 0.5);
             overflow: scroll;
             display: none;
         }
@@ -72,18 +73,32 @@
             background-color: white;
             width: 70vw;
             margin: 4rem auto;
+            position: absolute;
+            right: 10vw;
+
         }
 
         #luk {
             position: fixed;
-            right: 2rem;
+            right: 10vw;
             padding-right: 2rem;
+            z-index: 10;
         }
 
         #luk button {
-            font-size: 2rem;
+            font-size: 3rem;
             padding: 1rem 2rem;
             cursor: pointer;
+        }
+
+        .filter {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            margin: 0 1vw 1vw 0;
+        }
+
+        .filter:hover {
+            background-color: rgba(55, 223, 253, 0.89);
         }
 
     </style>
@@ -91,10 +106,10 @@
 
 <body>
     <div id="popup">
-        <div id="luk">
-            <button> X </button>
-            <div id="indhold"></div>
-        </div>
+        <div id="luk"> <button> X </button> </div>
+
+        <div id="indhold"></div>
+
     </div>
     <header class="menu">
         <h1>Alle retter</h1>
@@ -110,7 +125,6 @@
     <main>
         <section id="skriv">
 
-
         </section>
     </main>
     <footer></footer>
@@ -122,6 +136,7 @@
         let filter = "alle";
         let dest = document.querySelector("#skriv");
         async function hentJson() {
+            //henter array info fra onlie skema
             let myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
             ret = await myJson.json();
 
@@ -129,6 +144,7 @@
         }
 
         function udMedret() {
+            // siger at htmlen skal være tom og fylder det derefter
             dest.innerHTML = "";
             ret.forEach(ret => {
                 if (filter == "alle" || filter == ret.kategori) {
@@ -144,7 +160,7 @@
         }
 
         function visSingle(ret) {
-            document.querySelector("#indhold").innerHTML = `<article class="person"> <h2>${ret.navn}</h2><img src="imgs/large/${ret.billede}.jpg" alt="${ret.navn}"><p>Pris: ${ret.pris},-</p> <p>Beskrivelse: ${ret.lang}</p></article>`;
+            document.querySelector("#indhold").innerHTML = `<article class="enkelt"> <h2>${ret.navn}</h2><img src="imgs/large/${ret.billede}.jpg" alt="${ret.navn}"><p>Pris: ${ret.pris},-</p> <p>Oprindelse: ${ret.oprindelse}</p> <p>Beskrivelse: ${ret.lang}</p></article>`;
             document.querySelector("#popup").style.display = "block";
             document.querySelector("#popup #luk").addEventListener("click", close);
 
@@ -176,4 +192,3 @@
 </body>
 
 </html>
-tro på det!
