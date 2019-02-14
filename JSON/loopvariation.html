@@ -146,15 +146,28 @@
         function udMedret() {
             // siger at htmlen skal være tom og fylder det derefter
             dest.innerHTML = "";
-            // her siger vi at hver af elementerne i retter hedder ret. Nu ved den det!
-            retter.forEach(ret => {
+
+
+
+            // her siger vi at hver af elementerne i retter hedder ret og har nr i
+            retter.forEach((ret, i) => {
+
+
+
+
+
+
                 if (filter == "alle" || filter == ret.kategori) {
                     let template =
                         `<article class="enkelt"> <h3>${ret.navn}</h3><p> ${ret.kategori}</p> <p>Pris: ${ret.pris}.-</p> <p>${ret.kort}</p><p>Oprindelse: ${ret.oprindelse}</p></br><img src="imgs/small/${ret.billede}-sm.jpg" alt="${ret.navn}"></article>`;
                     // insertAdjecentHTML kan bruges sammen med eventlistener
                     dest.insertAdjacentHTML("beforeend", template);
-                    // hvert element kommer til at være det sidste, da de bliver smidt ind en af gangen, SMART!
-                    dest.lastElementChild.addEventListener("click", () => {
+
+
+
+
+                    // her vælger den hvert element med classen .enkelt og nr i som selv skifter
+                    dest.querySelectorAll(".enkelt")[i].addEventListener("click", () => {
                         visSingle(ret);
                     });
                 }
