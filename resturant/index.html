@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A La Place</title>
+
+    <!--    god til at gemme sin side fra Google søgninger    -->
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="img/logoet.JPG" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300i" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <div id="popup">
+        <div id="luk"> <button class="luk"> X </button> </div>
+        <div id="indhold"></div>
+
+    </div>
+
+    <div class="wrapper">
+        <header id="header">
+            <a href="index.html"><img id="logo" alt="A La Place´s logo" src="img/5logo.JPG"></a>
+            <h1 id="h1er">A La Place</h1>
+
+
+
+
+        </header>
+        <div id="burger-button" onclick="openSidebar()">
+            <div class="burger-bar"></div>
+            <div class="burger-bar"></div>
+            <div class="burger-bar"></div>
+        </div>
+        <div id="burger-menu">
+            <nav id="navmenu">
+
+
+                <div class="menuB"><a href="#skriv">
+                        <p>Menuen</p>
+                    </a>
+                </div><br>
+
+
+                <div class="menuB"><a href="#galleri">
+                        <p>Galleri</p>
+                    </a>
+                </div><br>
+
+
+                <div class="menuB"><a href="#info">
+                        <p>Info</p>
+                    </a></div>
+                <br>
+
+
+                <div class="menuB" onclick="openFilter()">
+                    <p> Filter</p>
+                </div>
+
+                <div id="filterbutton">
+
+                    <div class="filter valgt" data-ret="alle">
+                        <p>Alle</p>
+                    </div><br>
+
+                    <div class="filter" data-ret="forretter">
+                        <p>Forretter</p>
+                    </div><br>
+
+                    <div class="filter" data-ret="hovedretter">
+                        <p>Hovedretter</p>
+                    </div><br>
+
+                    <div class="filter" data-ret="desserter">
+                        <p>Desserter</p>
+                    </div><br>
+
+                    <div class="filter" data-ret="drikke">
+                        <p>Drikke</p>
+                    </div>
+                    <p>Du ser nu</p>
+                    <h4></h4>
+
+                </div>
+
+            </nav>
+        </div>
+        <div id="section-right">
+        </div>
+        <div id="section-left"></div>
+        <div id="skriv">
+
+        </div>
+
+    </div>
+    <div id="gal">
+        <h2>Galleri</h2>
+    </div>
+    <div id="galleri">
+
+        <img class="galleriImg" id="gal1" alt="mad" src="galleri/1.jpg">
+        <img class="galleriImg" id="gal5" alt="mad" src="galleri/2.jpg">
+        <img class="galleriImg" id="gal3" alt="mad" src="galleri/3.jpg">
+        <img class="galleriImg" id="gal4" alt="mad" src="galleri/4.jpg">
+        <img class="galleriImg" id="gal2" alt="mad" src="galleri/5.jpg">
+        <img class="galleriImg" id="gal6" alt="mad" src="galleri/6.jpg">
+        <img class="galleriImg" id="gal7" alt="mad" src="galleri/7.jpg">
+        <img class="galleriImg" id="gal8" alt="mad" src="galleri/8.jpg">
+        <img class="galleriImg" id="gal9" alt="mad" src="galleri/9.jpg">
+        <div class="galleriImg" id="gal10"></div>
+        <div class="galleriImg" id="gal11"></div>
+        <div class="galleriImg" id="gal12"></div>
+        <div class="galleriImg" id="gal13"></div>
+        <div class="galleriImg" id="gal14"></div>
+        <div class="galleriImg" id="gal15"></div>
+        <div class="galleriImg" id="gal16"></div>
+        <div class="galleriImg" id="gal17"></div>
+        <div class="galleriImg" id="gal18"></div>
+
+
+    </div>
+    <section id="info">
+        <h2 id="aabningstider">Åbningstider</h2>
+        <div id="dage">
+            <p>Mandag - fredag:</p>
+            <p>Lørdag:</p>
+            <p>Søndag:</p>
+        </div>
+
+        <div id="tid">
+            <p>08:30 - 22:30</p>
+            <p>09:00 - 21:30</p>
+            <p>07:00 - 19:30</p>
+        </div>
+        <h2 id="historieh2">Historie</h2>
+        <div id="historie">
+            <p>
+                Quelque chose doit être écrit, et je ne sais pas trop quoi écrire, mais maintenant je viens d'écrire beaucoup de merde, si jamais il est traduit, vous saurez que vous avez perdu votre temps sur ce texte de merde comme autant bien aurait pu être Lorem Ipsum.</p>
+        </div>
+
+    </section>
+
+    <footer id="footer">
+        <p>Sorøvej 84
+            4200 Slagelse
+            kundeservice@cafevivaldi.dk
+            TLF: 58 500 600
+            CVR: 27231802 </p>
+        <a href="https://icons8.com/icon/13912/facebook">Facebook icon by Icons8 </a><a href="https://icons8.com/icon/13928/instagram-old">Instagram Old icon by Icons8</a><a href="https://icons8.com/icon/23029/snapchat">Snapchat icon by Icons8</a><a><img src="https://img.icons8.com/ios/50/000000/snapchat.png" class="fotIcon" alt="snapchat logo"></a><a><img src="https://img.icons8.com/color/50/000000/facebook.png" class="fotIcon" alt="facebook logo"></a><a><img src="https://img.icons8.com/color/50/000000/instagram.png" alt="instagram logo" class="fotIcon"></a>
+    </footer>
+
+    <script src="script.js"></script>
+
+
+
+</body>
+
+</html>
